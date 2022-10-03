@@ -1,0 +1,13 @@
+.DS_Store
+wordpress/*
+!wordpress/wp-content
+wordpress/wp-content/*
+
+!wordpress/wp-content/plugins
+wordpress/wp-content/plugins/krg-headless-blog
+
+!wordpress/wp-content/themes/
+wordpress/wp-content/themes/*
+!wordpress/wp-content/themes/twentytwentyone
+
+!wordpress/wp-content/languages

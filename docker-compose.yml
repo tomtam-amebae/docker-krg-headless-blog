@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  db:
+    image: amd64/mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: dbpassword
+      MYSQL_DATABASE: wordpress_local
+      MYSQL_USER: wordpress_db_user
+      MYSQL_PASSWORD: wordpress_db_password
+      WORDPRESS_TABLE_PREFIX: ps_
+    networks:
+      - wpsite
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - wpsite
+
+  wordpress:
+    depends_on:
+      - db
+    image: wp_with_phpext
+    volumes:
+      - ./wordpress:/var/www/html
+    ports:
+      - "8000:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress_db_user
+      WORDPRESS_DB_PASSWORD: wordpress_db_password
+      WORDPRESS_DB_NAME: wordpress_local
+      WORDPRESS_DEBUG: true
+    networks:
+      - wpsite
+
+networks:
+  wpsite:
+volumes:
+  db_data: {}
