@@ -4,6 +4,7 @@
 ```console
 $ git clone git@github.com:tomtam-amebae/docker-krg-headless-blog.git
 $ cd docker-krg-headless-blog
+$ docker build -t wp_with_phpext .
 $ docker-compose up -d
 
 # http://localhost:8000/ (WP Site)
